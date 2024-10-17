@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Card Carousel</title>
+  <style>
+    /* Reset and Styling Basics */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #1e1e2e;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Carousel Container */
+    .carousel-container {
+      perspective: 1000px;
+      width: 80%;
+      max-width: 800px;
+    }
+
+    /* Carousel */
+    .carousel {
+      display: flex;
+      justify-content: center;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+    }
+
+    /* Individual Cards */
+    .card {
+      position: absolute;
+      width: 200px;
+      height: 300px;
+      background: linear-gradient(135deg, #6d5dfc, #a87cfa);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      transform-origin: center;
+      transition: transform 0.8s;
+      opacity: 0.8;
+    }
+
+    /* Animating the 3D placement of cards in a circle */
+    .card:nth-child(1) { transform: rotateY(0deg) translateZ(300px); }
+    .card:nth-child(2) { transform: rotateY(72deg) translateZ(300px); }
+    .card:nth-child(3) { transform: rotateY(144deg) translateZ(300px); }
+    .card:nth-child(4) { transform: rotateY(216deg) translateZ(300px); }
+    .card:nth-child(5) { transform: rotateY(288deg) translateZ(300px); }
+
+    /* Buttons for navigation */
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #6d5dfc;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #5047b8;
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel-container">
+    <div class="carousel">
+      <div class="card">Card 1</div>
+      <div class="card">Card 2</div>
+      <div class="card">Card 3</div>
+      <div class="card">Card 4</div>
+      <div class="card">Card 5</div>
+    </div>
+    <div class="buttons">
+      <button id="prev">⟵ Previous</button>
+      <button id="next">Next ⟶</button>
+    </div>
+  </div>
+
+  <script>
+    const carousel = document.querySelector('.carousel');
+    let angle = 0; // Start with 0 degrees
+
+    // Event Listeners for Buttons
+    document.getElementById('next').addEventListener('click', () => {
+      angle -= 72; // Rotate clockwise by 72 degrees
+      rotateCarousel();
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+      angle += 72; // Rotate counter-clockwise by 72 degrees
+      rotateCarousel();
+    });
+
+    // Function to Rotate Carousel
+    function rotateCarousel() {
+      carousel.style.transform = `rotateY(${angle}deg)`;
+    }
+  </script>
+</body>
+</html>
