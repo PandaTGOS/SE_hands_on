@@ -24,6 +24,7 @@
 
     /* Carousel Container */
     .carousel-container {
+      position: relative;
       perspective: 1000px;
       width: 80%;
       max-width: 800px;
@@ -65,26 +66,33 @@
     .card:nth-child(4) { transform: rotateY(216deg) translateZ(300px); }
     .card:nth-child(5) { transform: rotateY(288deg) translateZ(300px); }
 
-    /* Buttons for navigation */
-    .buttons {
-      display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
-    }
-
-    button {
-      padding: 10px 20px;
+    /* Navigation Buttons */
+    .button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 15px 20px;
       border: none;
       border-radius: 5px;
       background-color: #6d5dfc;
       color: white;
-      font-size: 18px;
+      font-size: 20px;
       cursor: pointer;
       transition: background-color 0.3s;
     }
 
-    button:hover {
+    /* Button Hover Effect */
+    .button:hover {
       background-color: #5047b8;
+    }
+
+    /* Button Positions */
+    #prev {
+      left: -60px; /* Position it off the left edge slightly */
+    }
+
+    #next {
+      right: -60px; /* Position it off the right edge slightly */
     }
   </style>
 </head>
@@ -97,10 +105,8 @@
       <div class="card">Card 4</div>
       <div class="card">Card 5</div>
     </div>
-    <div class="buttons">
-      <button id="prev">⟵ Previous</button>
-      <button id="next">Next ⟶</button>
-    </div>
+    <button id="prev" class="button">⟵</button>
+    <button id="next" class="button">⟶</button>
   </div>
 
   <script>
@@ -118,7 +124,6 @@
       rotateCarousel();
     });
 
-    // Function to Rotate Carousel
     function rotateCarousel() {
       carousel.style.transform = `rotateY(${angle}deg)`;
     }
